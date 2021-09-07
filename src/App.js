@@ -4,6 +4,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NativeBaseProvider} from 'native-base';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Provider} from 'react-redux';
+import store from './app/store';
 import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
@@ -58,17 +60,19 @@ const TabNavigator = () => (
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <rootStack.Navigator
-          initialRouteName="Splash"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <rootStack.Screen name={SCREEN_NAME.Splash} component={Splash} />
-          <rootStack.Screen name="Main" component={TabNavigator} />
-        </rootStack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <rootStack.Navigator
+            initialRouteName="Splash"
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <rootStack.Screen name={SCREEN_NAME.Splash} component={Splash} />
+            <rootStack.Screen name="Main" component={TabNavigator} />
+          </rootStack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </Provider>
   );
 }
