@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {SCREEN_NAME} from '../../constants/global';
 
 export default function Splash({navigation}) {
   useEffect(() => {

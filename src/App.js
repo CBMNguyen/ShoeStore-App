@@ -1,15 +1,15 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NativeBaseProvider} from 'native-base';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
 import Order from './screens/Order';
 import Personal from './screens/Personal';
 import Splash from './screens/Splash';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const rootStack = createNativeStackNavigator();
 const rootTab = createBottomTabNavigator();
@@ -58,17 +58,17 @@ const TabNavigator = () => (
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <rootStack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <rootStack.Screen name={SCREEN_NAME.Splash} component={Splash} />
-        <rootStack.Screen name="Main" component={TabNavigator} />
-      </rootStack.Navigator>
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <rootStack.Navigator
+          initialRouteName="Splash"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <rootStack.Screen name={SCREEN_NAME.Splash} component={Splash} />
+          <rootStack.Screen name="Main" component={TabNavigator} />
+        </rootStack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({});

@@ -1,12 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Box} from 'native-base';
 
 export default function Home() {
-  return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  );
+  return <Box>Home</Box>;
 }
-
-const styles = StyleSheet.create({});
