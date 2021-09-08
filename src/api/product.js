@@ -11,9 +11,9 @@ const productApi = {
     return axiosClient.get(url);
   },
 
-  update: product => {
-    const url = `/products/${product._id}`;
-    return axiosClient.patch(url, product);
+  update: (productId, data) => {
+    const url = `/products/${productId}`;
+    return axiosClient.patch(url, data);
   },
 };
 

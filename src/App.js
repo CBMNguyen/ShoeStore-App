@@ -5,6 +5,7 @@ import {NativeBaseProvider} from 'native-base';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Provider} from 'react-redux';
+import {shadow} from 'native-base';
 import store from './app/store';
 import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
