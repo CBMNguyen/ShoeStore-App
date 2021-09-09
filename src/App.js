@@ -5,17 +5,36 @@ import {NativeBaseProvider} from 'native-base';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Provider} from 'react-redux';
-import {shadow} from 'native-base';
 import store from './app/store';
 import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
 import Order from './screens/Order';
 import Personal from './screens/Personal';
+import ProductItem from './screens/ProductItem';
 import Splash from './screens/Splash';
+
+const config = {
+  dependencies: {
+    'linear-gradient': require('react-native-linear-gradient').default,
+  },
+};
 
 const rootStack = createNativeStackNavigator();
 const rootTab = createBottomTabNavigator();
+const ProductStack = createNativeStackNavigator();
+
+const HomeNavigator = () => (
+  <ProductStack.Navigator
+    initialRouteName="Product"
+    screenOptions={{headerShown: false}}>
+    <ProductStack.Screen name="Product" component={Home} />
+    <ProductStack.Screen
+      name={SCREEN_NAME.ProductItem}
+      component={ProductItem}
+    />
+  </ProductStack.Navigator>
+);
 
 const TabNavigator = () => (
   <rootTab.Navigator
@@ -52,7 +71,7 @@ const TabNavigator = () => (
       },
       tabBarActiveTintColor: '#db2777',
     })}>
-    <rootTab.Screen name="Home" component={Home} />
+    <rootTab.Screen name="Home" component={HomeNavigator} />
     <rootTab.Screen name="Cart" component={Cart} />
     <rootTab.Screen name="Order" component={Order} />
     <rootTab.Screen name="Personal" component={Personal} />
@@ -62,7 +81,7 @@ const TabNavigator = () => (
 export default function App() {
   return (
     <Provider store={store}>
-      <NativeBaseProvider>
+      <NativeBaseProvider config={config}>
         <NavigationContainer>
           <rootStack.Navigator
             initialRouteName="Splash"

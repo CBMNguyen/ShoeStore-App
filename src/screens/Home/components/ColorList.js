@@ -33,7 +33,6 @@ export default function ColorList({color, colors, setColor}) {
               {color === c.color && (
                 <Icon
                   size="lg"
-                  marginTop={1}
                   color={checkColor}
                   as={<Ionicons name="checkmark-sharp" />}
                 />

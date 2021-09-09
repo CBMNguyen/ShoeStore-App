@@ -1,6 +1,7 @@
 import {Box, FlatList} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAME} from '../../constants/global';
 import {fetchCategory} from './categorySlice';
 import {fetchColor} from './colorSlice';
 import Header from './components/Header';
@@ -8,7 +9,7 @@ import ProductListItem from './components/ProductListItem';
 import {fetchProduct} from './productSlice';
 import {fetchSize} from './sizeSlice';
 
-export default function Home() {
+export default function Home({navigation}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,7 +62,9 @@ export default function Home() {
         contentContainerStyle={{margin: 8}}
         keyboardDismissMode="on-drag"
         keyExtractor={item => item._id}
-        renderItem={({item}) => <ProductListItem product={item} />}
+        renderItem={({item}) => (
+          <ProductListItem navigation={navigation} product={item} />
+        )}
       />
     </Box>
   );

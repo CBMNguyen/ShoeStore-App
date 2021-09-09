@@ -3,8 +3,9 @@ import {Box, Icon, Image, Text} from 'native-base';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {SCREEN_NAME} from '../../../constants/global';
 
-export default function ProductListItem({product}) {
+export default function ProductListItem({product, navigation}) {
   return (
     <Box
       flex={1}
@@ -13,7 +14,9 @@ export default function ProductListItem({product}) {
       borderRadius="xl"
       margin={2}
       padding={4}>
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate(SCREEN_NAME.ProductItem, product)}>
         <Box alignItems="center">
           <Image
             source={{
