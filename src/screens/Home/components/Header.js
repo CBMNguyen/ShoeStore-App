@@ -1,27 +1,35 @@
-import React from 'react';
-import {HStack, Input, Icon, Text, Image, VStack} from 'native-base';
+import {HStack, Icon, Image, Input, Text, VStack} from 'native-base';
+import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useState} from 'react';
+import FilterModel from './FilterModel';
 
-export default function Header() {
+export default function Header({onFilterChange, filter, color, size}) {
   const [showInput, setShowInput] = useState(false);
+
+  const handleNameChange = name => {
+    if (!onFilterChange) return;
+    onFilterChange({name});
+  };
+
   return (
     <VStack
-      height={showInput ? 130 : 70}
+      shadow={5}
       paddingX={4}
       bgColor="#fff"
-      shadow={5}>
+      height={showInput ? 130 : 70}>
       <HStack alignItems="center">
-        <Icon
-          size="md"
-          as={<Ionicons name="filter" />}
-          color="gray.800"
-          marginTop={1}
+        <FilterModel
+          sizes={size}
+          colors={color}
+          filter={filter}
+          onFilterChange={onFilterChange}
         />
+
         <HStack flex={1} marginLeft={4} alignItems="center">
           <Text fontSize={34} fontFamily="Pacifico-Regular" color="#000">
             Shoes Store
           </Text>
+
           <Image
             source={require('../../../assets/images/logo.png')}
             width={8}
@@ -32,19 +40,21 @@ export default function Header() {
             alt="logo"
           />
         </HStack>
+
         <Icon
           size="md"
-          as={<Ionicons name="search" />}
           marginTop={1}
           color="gray.500"
+          as={<Ionicons name="search" />}
           onPress={() => setShowInput(!showInput)}
         />
       </HStack>
+
       <Input
-        placeholder="Search name ..."
-        display={showInput ? 'flex' : 'none'}
         fontSize={18}
-        paddingX={4}
+        placeholder="  Search name ..."
+        display={showInput ? 'flex' : 'none'}
+        onChangeText={value => handleNameChange(value)}
       />
     </VStack>
   );
