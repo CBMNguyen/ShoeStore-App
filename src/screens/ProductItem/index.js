@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import ImageScrollView from '../Home/components/ImageScrollView';
+import ImageScrollView from './components/ImageScrollView';
 
 export default function ProductItem({route}) {
   const product = route.params;
