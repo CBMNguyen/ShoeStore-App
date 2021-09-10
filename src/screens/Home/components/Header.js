@@ -15,7 +15,7 @@ export default function Header({onFilterChange, filter, color, size}) {
     <VStack
       shadow={5}
       paddingX={4}
-      marginBottom={2}
+      marginBottom={1}
       bgColor="pink.500"
       height={showInput ? 130 : 70}>
       <HStack alignItems="center">

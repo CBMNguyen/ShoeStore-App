@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchCategory} from './categorySlice';
 import {fetchColor} from './colorSlice';
+import Empty from './components/Empty';
 import Header from './components/Header';
 import ProductListItem from './components/ProductListItem';
 import {fetchProduct} from './productSlice';
@@ -54,17 +55,21 @@ export default function Home({navigation}) {
         onFilterChange={handleFilterChange}
       />
 
-      <FlatList
-        flex={1}
-        numColumns={2}
-        data={filterProduct}
-        contentContainerStyle={{margin: 8}}
-        keyboardDismissMode="on-drag"
-        keyExtractor={item => item._id}
-        renderItem={({item}) => (
-          <ProductListItem navigation={navigation} product={item} />
-        )}
-      />
+      {filterProduct.length !== 0 ? (
+        <FlatList
+          flex={1}
+          numColumns={2}
+          data={filterProduct}
+          contentContainerStyle={{margin: 8}}
+          keyboardDismissMode="on-drag"
+          keyExtractor={item => item._id}
+          renderItem={({item}) => (
+            <ProductListItem navigation={navigation} product={item} />
+          )}
+        />
+      ) : (
+        <Empty />
+      )}
     </Box>
   );
 }
