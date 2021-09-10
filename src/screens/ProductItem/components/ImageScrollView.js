@@ -48,7 +48,7 @@ export default function ImageScrollView({product}) {
         position="absolute"
         bottom={-8}>
         {[1, 2, 3].map((e, i) => (
-          <Text margin="3" color={dot === i ? '#000' : '#888'}>
+          <Text key={i} margin="3" color={dot === i ? '#000' : '#888'}>
             ●
           </Text>
         ))}

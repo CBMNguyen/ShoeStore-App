@@ -1,7 +1,6 @@
 import {Box, FlatList} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {SCREEN_NAME} from '../../constants/global';
 import {fetchCategory} from './categorySlice';
 import {fetchColor} from './colorSlice';
 import Header from './components/Header';

@@ -72,7 +72,7 @@ const TabNavigator = () => (
       tabBarActiveTintColor: '#db2777',
     })}>
     <rootTab.Screen name="Home" component={HomeNavigator} />
-    <rootTab.Screen name="Cart" component={Cart} />
+    <rootTab.Screen options={{tabBarBadge: 0}} name="Cart" component={Cart} />
     <rootTab.Screen name="Order" component={Order} />
     <rootTab.Screen name="Personal" component={Personal} />
   </rootTab.Navigator>

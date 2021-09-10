@@ -1,11 +1,13 @@
-import {Box, Button, Heading, Icon, Text, VStack} from 'native-base';
+import {Box, Button, Heading, Icon, Text, VStack, useToast} from 'native-base';
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ImageScrollView from './components/ImageScrollView';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProductItem({route}) {
+  const toast = useToast();
   const product = route.params;
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
@@ -127,7 +129,9 @@ export default function ProductItem({route}) {
               name="medical-bag"
               size={24}
             />
-          }></Button>
+          }
+          onPress={() => handleAddtoCart(product)}
+        />
       </VStack>
     </Box>
   );
