@@ -3,6 +3,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import showToast from '../../utils/showToast';
 import {removeProduct, selectQuantity, selectSize} from './cartSlice';
+import Empty from './components/Empty';
 import Header from './components/Header';
 import ProductItem from './components/ProductItem';
 
@@ -44,20 +45,24 @@ export default function Cart({navigation}) {
     <Box flex={1}>
       <Header navigation={navigation} />
 
-      <FlatList
-        contentContainerStyle={{margin: 16}}
-        data={cart}
-        renderItem={({item}) => (
-          <ProductItem
-            product={item}
-            onSelectedSize={handleSelectedSize}
-            onDeleteProduct={handleDeleteProduct}
-            onIncreaseQuantity={handleIncreaseQuantity}
-            onDecreaseQuantity={handleDecreaseQuantity}
-          />
-        )}
-        keyExtractor={item => item._id}
-      />
+      {cart.length !== 0 ? (
+        <FlatList
+          contentContainerStyle={{margin: 16}}
+          data={cart}
+          renderItem={({item}) => (
+            <ProductItem
+              product={item}
+              onSelectedSize={handleSelectedSize}
+              onDeleteProduct={handleDeleteProduct}
+              onIncreaseQuantity={handleIncreaseQuantity}
+              onDecreaseQuantity={handleDecreaseQuantity}
+            />
+          )}
+          keyExtractor={item => item._id}
+        />
+      ) : (
+        <Empty navigation={navigation} />
+      )}
     </Box>
   );
 }
