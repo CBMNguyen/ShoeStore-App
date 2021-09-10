@@ -15,7 +15,6 @@ export default function Header({onFilterChange, filter, color, size}) {
     <VStack
       shadow={5}
       paddingX={4}
-      marginBottom={1}
       bgColor="pink.500"
       height={showInput ? 130 : 70}>
       <HStack alignItems="center">
@@ -53,7 +52,6 @@ export default function Header({onFilterChange, filter, color, size}) {
 
       <Input
         backgroundColor="#fff"
-        padding={2}
         fontSize={18}
         placeholder="Search name ..."
         display={showInput ? 'flex' : 'none'}
