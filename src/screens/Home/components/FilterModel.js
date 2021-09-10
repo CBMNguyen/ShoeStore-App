@@ -18,7 +18,7 @@ export default function FilterModel({filter, colors, sizes, onFilterChange}) {
         onPress={() => setShowModal(!showModal)}
         size="md"
         as={<Ionicons name="menu-outline" />}
-        color="gray.800"
+        color="#fff"
         marginTop={1}
       />
 

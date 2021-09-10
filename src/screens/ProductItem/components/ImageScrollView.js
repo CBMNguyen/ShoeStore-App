@@ -1,10 +1,8 @@
-import {Box, Image, ScrollView, View, Text, Icon} from 'native-base';
-import React from 'react';
-import {Dimensions} from 'react-native';
 import {REACT_APP_API_URL} from '@env';
-import {useState} from 'react';
+import {Box, Icon, Image, ScrollView, Text, View} from 'native-base';
+import React, {useState} from 'react';
+import {Dimensions} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {NavigationContainer} from '@react-navigation/native';
 
 export default function ImageScrollView({product, navigation}) {
   const [dot, setDot] = useState(0);

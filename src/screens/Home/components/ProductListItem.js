@@ -3,9 +3,19 @@ import {Box, Icon, Image, Text} from 'native-base';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 import {SCREEN_NAME} from '../../../constants/global';
 
 export default function ProductListItem({product, navigation}) {
+  const {cart} = useSelector(state => state.cart);
+
+  let cartColor = 'gray.300';
+  const index = cart.findIndex(productItem => productItem._id === product._id);
+
+  if (index !== -1) {
+    cartColor = 'pink.500';
+  }
+
   return (
     <Box
       flex={1}
@@ -36,7 +46,7 @@ export default function ProductListItem({product, navigation}) {
           <Icon
             size="sm"
             as={<Ionicons name="cart-outline" />}
-            color="gray.300"
+            color={cartColor}
           />
         </Box>
       </TouchableOpacity>

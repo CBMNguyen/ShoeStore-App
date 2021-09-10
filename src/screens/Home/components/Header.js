@@ -15,7 +15,8 @@ export default function Header({onFilterChange, filter, color, size}) {
     <VStack
       shadow={5}
       paddingX={4}
-      bgColor="#fff"
+      marginBottom={2}
+      bgColor="pink.500"
       height={showInput ? 130 : 70}>
       <HStack alignItems="center">
         <FilterModel
@@ -26,7 +27,7 @@ export default function Header({onFilterChange, filter, color, size}) {
         />
 
         <HStack flex={1} marginLeft={4} alignItems="center">
-          <Text fontSize={34} fontFamily="Pacifico-Regular" color="#000">
+          <Text fontSize={34} fontFamily="Pacifico-Regular" color="#fff">
             Shoes Store
           </Text>
 
@@ -44,16 +45,17 @@ export default function Header({onFilterChange, filter, color, size}) {
         <Icon
           size="md"
           marginTop={1}
-          color="gray.500"
+          color="#fff"
           as={<Ionicons name="search" />}
           onPress={() => setShowInput(!showInput)}
         />
       </HStack>
 
       <Input
-        paddingX={2}
+        backgroundColor="#fff"
+        padding={2}
         fontSize={18}
-        placeholder=" Search name ..."
+        placeholder="Search name ..."
         display={showInput ? 'flex' : 'none'}
         onChangeText={value => handleNameChange(value)}
       />

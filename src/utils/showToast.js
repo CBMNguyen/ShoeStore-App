@@ -5,8 +5,8 @@ export default function (toast, status, description) {
     status: status,
     description: description,
     position: 'relative',
-    right: -10,
-    top: -20,
+    right: -32,
+    top: -50,
     width: 360,
   });
 }
