@@ -1,10 +1,12 @@
-import {Box, Image, ScrollView, View, Text} from 'native-base';
+import {Box, Image, ScrollView, View, Text, Icon} from 'native-base';
 import React from 'react';
 import {Dimensions} from 'react-native';
 import {REACT_APP_API_URL} from '@env';
 import {useState} from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {NavigationContainer} from '@react-navigation/native';
 
-export default function ImageScrollView({product}) {
+export default function ImageScrollView({product, navigation}) {
   const [dot, setDot] = useState(0);
   const {width} = Dimensions.get('window');
 
@@ -41,6 +43,16 @@ export default function ImageScrollView({product}) {
           </Box>
         ))}
       </ScrollView>
+
+      <Icon
+        onPress={() => navigation.goBack()}
+        size="md"
+        color="#000"
+        as={<Ionicons name="arrow-back" />}
+        position="absolute"
+        top={2}
+        left={2}
+      />
 
       <View
         flexDirection="row"

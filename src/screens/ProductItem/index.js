@@ -8,7 +8,7 @@ import showToast from '../../utils/showToast';
 import {addToCart} from '../Cart/cartSlice';
 import ImageScrollView from './components/ImageScrollView';
 
-export default function ProductItem({route}) {
+export default function ProductItem({route, navigation}) {
   const dispatch = useDispatch();
   const toast = useToast();
   const product = route.params;
@@ -48,7 +48,7 @@ export default function ProductItem({route}) {
   };
   return (
     <Box flex={1} bgColor="#fff">
-      <ImageScrollView product={product} />
+      <ImageScrollView navigation={navigation} product={product} />
 
       <VStack
         flex={1}
