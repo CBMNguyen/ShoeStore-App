@@ -1,6 +1,7 @@
-import {Box, FlatList, useToast} from 'native-base';
+import {Box, Button, FlatList, useToast} from 'native-base';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {SCREEN_NAME} from '../../constants/global';
 import showToast from '../../utils/showToast';
 import {removeProduct, selectQuantity, selectSize} from './cartSlice';
 import Empty from './components/Empty';
@@ -41,25 +42,39 @@ export default function Cart({navigation}) {
     showToast(toast, 'success', 'Delete product successfully');
   };
 
+  const handleGotoCheckout = async () => {
+    navigation.navigate(SCREEN_NAME.Order);
+  };
+
   return (
     <Box flex={1}>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} cart={cart} />
 
       {cart.length !== 0 ? (
-        <FlatList
-          contentContainerStyle={{margin: 16}}
-          data={cart}
-          renderItem={({item}) => (
-            <ProductItem
-              product={item}
-              onSelectedSize={handleSelectedSize}
-              onDeleteProduct={handleDeleteProduct}
-              onIncreaseQuantity={handleIncreaseQuantity}
-              onDecreaseQuantity={handleDecreaseQuantity}
-            />
-          )}
-          keyExtractor={item => item._id}
-        />
+        <Box flex={1}>
+          <FlatList
+            contentContainerStyle={{margin: 16}}
+            data={cart}
+            renderItem={({item}) => (
+              <ProductItem
+                product={item}
+                onSelectedSize={handleSelectedSize}
+                onDeleteProduct={handleDeleteProduct}
+                onIncreaseQuantity={handleIncreaseQuantity}
+                onDecreaseQuantity={handleDecreaseQuantity}
+              />
+            )}
+            keyExtractor={item => item._id}
+          />
+          <Button
+            onPress={() => handleGotoCheckout}
+            colorScheme="secondary"
+            position="absolute"
+            bottom={3}
+            right={2}>
+            Check out
+          </Button>
+        </Box>
       ) : (
         <Empty navigation={navigation} />
       )}

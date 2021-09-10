@@ -2,7 +2,13 @@ import {HStack, Icon, Image, Text} from 'native-base';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function Header({navigation}) {
+export default function Header({navigation, cart}) {
+  const totalPrice = cart.reduce(
+    (total, product) =>
+      (total += product.originalPrice * product.selectedQuantity),
+    0,
+  );
+
   return (
     <HStack bgColor="#fff" height={70} alignItems="center" bgColor="pink.500">
       <Icon
@@ -30,6 +36,17 @@ export default function Header({navigation}) {
           resizeMode="stretch"
           alt="logo"
         />
+        {cart.length !== 0 && (
+          <Text
+            marginTop={4}
+            fontSize="xl"
+            marginRight={4}
+            marginLeft="auto"
+            fontWeight="bold"
+            color="yellow.300">
+            {Math.floor(totalPrice).toString() + '$'}
+          </Text>
+        )}
       </HStack>
     </HStack>
   );
