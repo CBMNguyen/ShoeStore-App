@@ -1,17 +1,51 @@
-import {Box, Button, Heading, Icon, Text, VStack, useToast} from 'native-base';
+import {Box, Button, Heading, Icon, Text, useToast, VStack} from 'native-base';
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import showToast from '../../utils/showToast';
+import {addToCart} from '../Cart/cartSlice';
 import ImageScrollView from './components/ImageScrollView';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProductItem({route}) {
+  const dispatch = useDispatch();
   const toast = useToast();
   const product = route.params;
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
+  const {cart} = useSelector(state => state.cart);
 
+  const handleAddtoCart = async product => {
+    const index = cart.findIndex(
+      productItem => productItem._id === product._id,
+    );
+    if (index !== -1) {
+      showToast(toast, 'info', 'Product already exists in cart');
+      return;
+    } else {
+      let description = '';
+
+      if (!color) description = 'Please check color ! ';
+      else if (!size) description = 'Please check size !';
+      else description = 'Product added to cart successfully';
+
+      if (!color || !size) {
+        showToast(toast, 'info', description);
+        return;
+      }
+
+      const newProduct = {
+        ...product,
+        selectedSize: size,
+        selectedColor: color,
+        selectedQuantity: 1,
+      };
+
+      dispatch(addToCart(newProduct));
+      showToast(toast, 'success', description);
+    }
+  };
   return (
     <Box flex={1} bgColor="#fff">
       <ImageScrollView product={product} />
@@ -32,7 +66,7 @@ export default function ProductItem({route}) {
           {product.name}
         </Heading>
 
-        <Heading size="md" color="yellow.400">
+        <Heading size="sm" color="yellow.400">
           {product.originalPrice}$
         </Heading>
 
