@@ -6,6 +6,8 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Provider, useSelector} from 'react-redux';
 import store from './app/store';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
@@ -23,6 +25,7 @@ const config = {
 const rootStack = createNativeStackNavigator();
 const rootTab = createBottomTabNavigator();
 const ProductStack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
 
 const HomeNavigator = () => (
   <ProductStack.Navigator
@@ -36,8 +39,18 @@ const HomeNavigator = () => (
   </ProductStack.Navigator>
 );
 
+const AuthNAvigator = () => (
+  <AuthStack.Navigator
+    initialRouteName={SCREEN_NAME.Login}
+    screenOptions={{headerShown: false}}>
+    <AuthStack.Screen name={SCREEN_NAME.Login} component={Login} />
+    <AuthStack.Screen name={SCREEN_NAME.SignUp} component={Signup} />
+  </AuthStack.Navigator>
+);
+
 const TabNavigator = () => {
   const {cart} = useSelector(state => state.cart);
+  const {token} = useSelector(state => state.user);
   return (
     <rootTab.Navigator
       screenOptions={({route}) => ({
@@ -73,14 +86,17 @@ const TabNavigator = () => {
         },
         tabBarActiveTintColor: '#db2777',
       })}>
-      <rootTab.Screen name="Home" component={HomeNavigator} />
+      <rootTab.Screen name={SCREEN_NAME.Home} component={HomeNavigator} />
       <rootTab.Screen
         options={{tabBarBadge: cart.length}}
         name="Cart"
         component={Cart}
       />
-      <rootTab.Screen name="Order" component={Order} />
-      <rootTab.Screen name="Personal" component={Personal} />
+      <rootTab.Screen
+        name={SCREEN_NAME.Order}
+        component={token ? Order : AuthNAvigator}
+      />
+      <rootTab.Screen name={SCREEN_NAME.Personal} component={Personal} />
     </rootTab.Navigator>
   );
 };

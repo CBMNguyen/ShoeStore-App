@@ -5,6 +5,8 @@ export const SCREEN_NAME = {
   Order: 'Order',
   Personal: 'Personal',
   ProductItem: 'ProductItem',
+  SignUp: 'SignUp',
+  Login: 'Login',
 };
 
 export const BRAND_IMAGES = [

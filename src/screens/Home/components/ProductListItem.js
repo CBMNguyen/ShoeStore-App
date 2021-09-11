@@ -20,7 +20,7 @@ export default function ProductListItem({product, navigation}) {
     <Box
       flex={1}
       bgColor="#fff"
-      shadow={2}
+      shadow={9}
       borderRadius="xl"
       margin={2}
       padding={4}>

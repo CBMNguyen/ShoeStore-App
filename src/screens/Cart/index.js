@@ -1,8 +1,10 @@
+import {REACT_APP_JWT_KEY} from '@env';
 import {Box, Button, FlatList, useToast} from 'native-base';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREEN_NAME} from '../../constants/global';
 import showToast from '../../utils/showToast';
+import {getOrderWithCart} from '../Order/orderSlice';
 import {removeProduct, selectQuantity, selectSize} from './cartSlice';
 import Empty from './components/Empty';
 import Header from './components/Header';
@@ -12,6 +14,7 @@ export default function Cart({navigation}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const {cart} = useSelector(state => state.cart);
+  const {token} = useSelector(state => state.user);
 
   const handleIncreaseQuantity = product => {
     const action = {
@@ -42,7 +45,13 @@ export default function Cart({navigation}) {
     showToast(toast, 'success', 'Delete product successfully');
   };
 
-  const handleGotoCheckout = async () => {
+  const handleGotoCheckout = () => {
+    // if (!token) {
+    //   navigation.navigate(SCREEN_NAME.Home);
+    //   return;
+    // }
+    const order = cart.map(cart => ({...cart, state: ''}));
+    // dispatch(getOrderWithCart({order, userId: user._id}));
     navigation.navigate(SCREEN_NAME.Order);
   };
 
@@ -67,7 +76,7 @@ export default function Cart({navigation}) {
             keyExtractor={item => item._id}
           />
           <Button
-            onPress={() => handleGotoCheckout}
+            onPress={handleGotoCheckout}
             colorScheme="secondary"
             position="absolute"
             bottom={3}
