@@ -10,3 +10,7 @@ export default function (toast, status, description) {
     width: 360,
   });
 }
+
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

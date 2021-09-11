@@ -1,103 +1,171 @@
+import {yupResolver} from '@hookform/resolvers/yup';
 import {
   Box,
   Button,
-  FormControl,
   Heading,
   HStack,
   Icon,
-  Input,
+  ScrollView,
+  useToast,
   VStack,
 } from 'native-base';
 import * as React from 'react';
+import {useForm} from 'react-hook-form';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
+import * as yup from 'yup';
+import {createUser} from '../app/userSlice';
+import {SCREEN_NAME} from '../constants/global';
+import GenderField from '../custom-fields/GenderField';
+import InputField from '../custom-fields/InputField';
+import {showToastError} from '../utils/showToastError';
+import {showToastSuccess} from '../utils/showToastSuccess';
+
 export default function Signup({navigation}) {
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const {loading} = useSelector(state => state.user);
+
+  const defaultValues = {
+    email: '',
+    phone: '',
+    gender: '',
+    address: '',
+    lastname: '',
+    password: '',
+    firstname: '',
+  };
+  const schema = yup.object().shape({
+    firstname: yup.string().required('This field is require.'),
+    lastname: yup.string().required('This field is require.'),
+    email: yup
+      .string()
+      .matches(
+        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+        'Please enter correct email!',
+      )
+      .required('This field is require.'),
+    password: yup
+      .string()
+      .required('This field is require.')
+      .matches(
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}?/,
+        'Password must be at least 8 characters with one uppercase letter, one lowercase letter, and one special character',
+      ),
+    phone: yup
+      .string()
+      .required('this field is require.')
+      .matches(/^0[0-9]{9}$/, 'Please enter correct phone number!'),
+    gender: yup.string().required('This field is require.'),
+    address: yup.string().required('This field is require.'),
+  });
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({defaultValues, resolver: yupResolver(schema)});
+
+  const onSubmit = async data => {
+    try {
+      await showToastSuccess(toast, dispatch(createUser(data)));
+      navigation.replace(SCREEN_NAME.Login);
+    } catch (error) {
+      showToastError(toast, error);
+    }
+  };
+
   return (
-    <Box safeArea flex={1} p={2} w="95%" mx="auto" bgColor="#fff">
-      <HStack justifyContent="space-between" alignItems="center">
-        <Heading size="xl" color="secondary.500">
-          Welcome
+    <ScrollView safeArea flex={1} bgColor="#fff">
+      <Box flex={1} p={2} w="95%" mx="auto">
+        <HStack justifyContent="space-between" alignItems="center">
+          <Heading size="xl" color="secondary.500">
+            Hi! New User
+          </Heading>
+
+          <Icon
+            size="md"
+            color="#000"
+            as={<Ionicons name="arrow-back" />}
+            onPress={() => navigation.goBack()}
+          />
+        </HStack>
+
+        <Heading color="muted.400" size="sm">
+          Sign up to continue!
         </Heading>
 
-        <Icon
-          size="md"
-          color="#000"
-          as={<Ionicons name="arrow-back" />}
-          onPress={() => navigation.goBack()}
-        />
-      </HStack>
+        <VStack space={1} mt={3}>
+          <HStack space={5}>
+            <Box flex={1}>
+              <InputField
+                name="firstname"
+                control={control}
+                errors={errors}
+                placeholder="First name"
+              />
+            </Box>
 
-      <Heading color="muted.400" size="sm">
-        Sign up to continue!
-      </Heading>
+            <Box flex={1}>
+              <InputField
+                name="lastname"
+                control={control}
+                errors={errors}
+                placeholder="Last name"
+              />
+            </Box>
+          </HStack>
 
-      <VStack space={1} mt={3}>
-        <HStack space={5}>
-          <FormControl flex={1} mb={2}>
-            <FormControl.Label
-              _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-              First Name
-            </FormControl.Label>
-            <Input type="text" />
-          </FormControl>
+          <HStack space={5}>
+            <Box flex={1}>
+              <InputField
+                name="phone"
+                errors={errors}
+                control={control}
+                placeholder="Your phone"
+                keyboardType="phone-pad"
+              />
+            </Box>
+            <Box flex={1}>
+              <GenderField name="gender" control={control} errors={errors} />
+            </Box>
+          </HStack>
 
-          <FormControl flex={1} mb={1}>
-            <FormControl.Label
-              _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-              Last Name
-            </FormControl.Label>
-            <Input type="text" />
-          </FormControl>
-        </HStack>
+          <InputField
+            name="address"
+            control={control}
+            errors={errors}
+            placeholder="Your address"
+          />
 
-        <HStack space={5}>
-          <FormControl flex={1} mb={1}>
-            <FormControl.Label
-              _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-              Phone
-            </FormControl.Label>
-            <Input type="number" keyboardType="phone-pad" />
-          </FormControl>
-          <FormControl flex={1} mb={1}>
-            <FormControl.Label
-              _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-              Gender
-            </FormControl.Label>
-            <Input type="password" />
-          </FormControl>
-        </HStack>
+          <InputField
+            name="email"
+            control={control}
+            errors={errors}
+            placeholder="Your email"
+          />
 
-        <FormControl>
-          <FormControl.Label
-            _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-            address
-          </FormControl.Label>
-          <Input />
-        </FormControl>
+          <InputField
+            name="password"
+            type="password"
+            control={control}
+            errors={errors}
+            placeholder="Your password"
+          />
 
-        <FormControl>
-          <FormControl.Label
-            _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-            Email
-          </FormControl.Label>
-          <Input re />
-        </FormControl>
-
-        <FormControl mb={3}>
-          <FormControl.Label
-            _text={{color: 'muted.700', fontSize: 'md', fontWeight: 600}}>
-            Password
-          </FormControl.Label>
-          <Input type="password" />
-        </FormControl>
-
-        <VStack>
-          <Button
-            colorScheme="secondary"
-            _text={{color: 'white', fontSize: 'lg', fontWeight: 'bold'}}>
-            SignUp
-          </Button>
+          <VStack>
+            <Button
+              isLoading={loading}
+              isLoadingText="Submitting"
+              colorScheme="secondary"
+              onPress={handleSubmit(onSubmit)}
+              marginTop={3}
+              _text={{color: 'white', fontSize: 'lg', fontWeight: 'bold'}}>
+              SignUp
+            </Button>
+          </VStack>
         </VStack>
-      </VStack>
-    </Box>
+      </Box>
+    </ScrollView>
   );
 }

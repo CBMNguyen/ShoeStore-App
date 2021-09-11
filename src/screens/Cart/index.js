@@ -1,4 +1,3 @@
-import {REACT_APP_JWT_KEY} from '@env';
 import {Box, Button, FlatList, useToast} from 'native-base';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -14,7 +13,7 @@ export default function Cart({navigation}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const {cart} = useSelector(state => state.cart);
-  const {token} = useSelector(state => state.user);
+  const {token, user} = useSelector(state => state.user);
 
   const handleIncreaseQuantity = product => {
     const action = {
@@ -46,12 +45,10 @@ export default function Cart({navigation}) {
   };
 
   const handleGotoCheckout = () => {
-    // if (!token) {
-    //   navigation.navigate(SCREEN_NAME.Home);
-    //   return;
-    // }
-    const order = cart.map(cart => ({...cart, state: ''}));
-    // dispatch(getOrderWithCart({order, userId: user._id}));
+    if (!token) {
+      // const order = cart.map(cart => ({...cart, state: ''}));
+      // dispatch(getOrderWithCart({order, userId: user._id}));
+    }
     navigation.navigate(SCREEN_NAME.Order);
   };
 

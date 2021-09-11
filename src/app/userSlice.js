@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import userApi from 'api/user';
+import jwt_decode from 'jwt-decode';
 
 const initialState = {
   token: null,
@@ -13,6 +14,8 @@ export const userLogin = createAsyncThunk(
   async (data, {rejectWithValue, fulfillWithValue, dispatch}) => {
     try {
       const {message, accessToken} = await userApi.login(data);
+      const {userId} = jwt_decode(accessToken);
+      await dispatch(getMe(userId));
       return fulfillWithValue({message, accessToken});
     } catch (error) {
       return rejectWithValue(error);
@@ -83,7 +86,7 @@ const userSlice = createSlice({
       state.error = '';
     },
 
-    // handle fetch employees
+    //handle fetch employees
     [getMe.pending]: state => {
       state.loading = true;
     },
