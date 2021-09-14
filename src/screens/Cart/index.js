@@ -45,9 +45,9 @@ export default function Cart({navigation}) {
   };
 
   const handleGotoCheckout = () => {
-    if (!token) {
-      // const order = cart.map(cart => ({...cart, state: ''}));
-      // dispatch(getOrderWithCart({order, userId: user._id}));
+    if (token) {
+      const order = cart.map(cart => ({...cart, state: ''}));
+      dispatch(getOrderWithCart({order, userId: user._id}));
     }
     navigation.navigate(SCREEN_NAME.Order);
   };
@@ -59,7 +59,7 @@ export default function Cart({navigation}) {
       {cart.length !== 0 ? (
         <Box flex={1}>
           <FlatList
-            contentContainerStyle={{margin: 16}}
+            contentContainerStyle={{padding: 16}}
             data={cart}
             renderItem={({item}) => (
               <ProductItem
@@ -74,6 +74,7 @@ export default function Cart({navigation}) {
           />
           <Button
             onPress={handleGotoCheckout}
+            _text={{fontWeight: 'bold'}}
             colorScheme="secondary"
             position="absolute"
             bottom={3}

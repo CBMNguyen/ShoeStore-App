@@ -17,6 +17,7 @@ import colorReducer from '../screens/Home/colorSlice';
 import productReducer from '../screens/Home/productSlice';
 import sizeReducer from '../screens/Home/sizeSlice';
 import userReducer from './userSlice';
+import orderReducer from '../screens/Order/orderSlice';
 
 const persistConfig = {
   key: 'ShoesStore',
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   size: sizeReducer,
   user: userReducer,
   products: productReducer,
+  order: orderReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

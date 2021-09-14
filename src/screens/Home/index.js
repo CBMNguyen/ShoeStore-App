@@ -66,7 +66,7 @@ export default function Home({navigation}) {
           data={filterProduct}
           keyboardDismissMode="on-drag"
           keyExtractor={item => item._id}
-          contentContainerStyle={{margin: 8}}
+          contentContainerStyle={{padding: 8}}
           renderItem={({item}) => (
             <ProductListItem navigation={navigation} product={item} />
           )}

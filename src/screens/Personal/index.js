@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux';
 
 export default function Personal() {
   const {user} = useSelector(state => state.user);
+
   return (
     <VStack flex={1} backgroundColor="#fff" padding={5}>
       <HStack alignItems="center" space={6}>
@@ -24,7 +25,7 @@ export default function Personal() {
             size="sm"
             left={50}
             bottom={0}
-            color="#000"
+            color="#bbb"
             position="absolute"
             as={<Ionicons name="camera-outline" />}
           />
