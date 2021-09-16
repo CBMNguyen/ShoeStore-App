@@ -1,11 +1,10 @@
-import {FormControl, Input} from 'native-base';
+import {FormControl, TextArea} from 'native-base';
 import React from 'react';
 import {Controller} from 'react-hook-form';
 import {capitalizeFirstLetter} from '../utils/showToast';
 
-export default function InputField({
+export default function TextAreaField({
   name,
-  type,
   errors,
   control,
   placeholder,
@@ -21,10 +20,8 @@ export default function InputField({
         name={name}
         control={control}
         render={({field}) => (
-          <Input
+          <TextArea
             {...field}
-            type={type}
-            marginBottom={2}
             placeholder={placeholder}
             keyboardType={keyboardType ? keyboardType : 'default'}
             onChangeText={val => field.onChange(val)}

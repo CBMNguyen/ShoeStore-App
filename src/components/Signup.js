@@ -54,7 +54,7 @@ export default function Signup({navigation}) {
       ),
     phone: yup
       .string()
-      .required('this field is require.')
+      .required('This field is require.')
       .matches(/^0[0-9]{9}$/, 'Please enter correct phone number!'),
     gender: yup.string().required('This field is require.'),
     address: yup.string().required('This field is require.'),

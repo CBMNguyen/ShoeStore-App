@@ -16,9 +16,9 @@ const userApi = {
     return axiosClient.post(url, data);
   },
 
-  update: user => {
-    const url = `/user/${user._id}`;
-    return axiosClient.patch(url, user);
+  update: (userId, data) => {
+    const url = `/user/${userId}`;
+    return axiosClient.patch(url, data);
   },
 };
 

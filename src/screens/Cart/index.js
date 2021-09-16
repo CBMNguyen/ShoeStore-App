@@ -5,7 +5,7 @@ import {SCREEN_NAME} from '../../constants/global';
 import showToast from '../../utils/showToast';
 import {getOrderWithCart} from '../Order/orderSlice';
 import {removeProduct, selectQuantity, selectSize} from './cartSlice';
-import Empty from './components/Empty';
+import Empty from '../../components/Empty';
 import Header from './components/Header';
 import ProductItem from './components/ProductItem';
 

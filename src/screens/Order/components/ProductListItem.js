@@ -11,7 +11,7 @@ export default function ProductListItem({product}) {
       bgColor="#fff"
       rounded="lg"
       marginBottom={1}>
-      <HStack height={55} position="relative" left={-16}>
+      <HStack height={60} position="relative" left={-16}>
         <Image
           top={-40}
           width={100}

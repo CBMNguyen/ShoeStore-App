@@ -6,12 +6,9 @@ export default function Empty({navigation}) {
   return (
     <Box flex={1} bgColor="#fff" justifyContent="center" alignItems="center">
       <VStack
-        shadow={9}
         width={280}
         height={280}
         bgColor="#fff"
-        rounded="full"
-        borderWidth={1}
         alignItems="center"
         justifyContent="center"
         borderColor="pink.500">
