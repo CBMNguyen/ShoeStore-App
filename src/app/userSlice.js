@@ -67,7 +67,6 @@ const userSlice = createSlice({
       state.token = '';
       state.user = '';
       state.error = '';
-      state.test = '';
     },
   },
   extraReducers: {

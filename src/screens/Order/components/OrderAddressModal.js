@@ -130,7 +130,12 @@ export default function OrderAddressModal({
 
   return (
     <>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+      <Modal
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+          setShowEditModel(false);
+        }}>
         <Modal.Content maxWidth="400px">
           <Modal.CloseButton />
           <Modal.Header>Delivery Address</Modal.Header>

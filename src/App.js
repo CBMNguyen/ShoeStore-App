@@ -98,7 +98,10 @@ const TabNavigator = () => {
         name={SCREEN_NAME.Order}
         component={token ? Order : AuthNAvigator}
       />
-      <rootTab.Screen name={SCREEN_NAME.Personal} component={Personal} />
+      <rootTab.Screen
+        name={SCREEN_NAME.Personal}
+        component={token ? Personal : AuthNAvigator}
+      />
     </rootTab.Navigator>
   );
 };

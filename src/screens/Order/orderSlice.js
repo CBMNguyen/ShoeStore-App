@@ -27,7 +27,6 @@ export const createOrder = createAsyncThunk(
   async (order, {rejectWithValue, fulfillWithValue}) => {
     try {
       const data = await orderApi.create(order);
-      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       return rejectWithValue(error);
