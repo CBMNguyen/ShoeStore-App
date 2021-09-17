@@ -5,28 +5,17 @@ import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function UserInfo({user}) {
+export default function UserInfo({user, showModal, setShowModal}) {
   return (
     <VStack space={4}>
       <HStack alignItems="center" space={6}>
-        <TouchableOpacity>
-          <Image
-            width={82}
-            height={82}
-            rounded="full"
-            alt={user._id}
-            source={{uri: `${REACT_APP_API_URL}/${user.image}`}}
-          />
-
-          <Icon
-            size="sm"
-            left={50}
-            bottom={0}
-            color="#bbb"
-            position="absolute"
-            as={<Ionicons name="camera-outline" />}
-          />
-        </TouchableOpacity>
+        <Image
+          width={82}
+          height={82}
+          rounded="full"
+          alt={user._id}
+          source={{uri: `${REACT_APP_API_URL}/${user.image}`}}
+        />
 
         <VStack position="relative" top={-10}>
           <Heading
@@ -40,7 +29,7 @@ export default function UserInfo({user}) {
         </VStack>
 
         <Box position="absolute" top={-4} right={4}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setShowModal(!showModal)}>
             <Icon
               size="md"
               color="#000"

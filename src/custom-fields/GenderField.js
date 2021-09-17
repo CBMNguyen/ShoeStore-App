@@ -17,6 +17,7 @@ export default function GenderField({control, name, errors}) {
           <Radio.Group
             name={name}
             flexDirection="row"
+            defaultValue={field.value}
             onChange={val => field.onChange(val)}>
             <Radio value="male" colorScheme="primary">
               <Text mx={2}>Male</Text>

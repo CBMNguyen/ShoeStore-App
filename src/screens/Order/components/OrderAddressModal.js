@@ -136,7 +136,7 @@ export default function OrderAddressModal({
           setShowModal(false);
           setShowEditModel(false);
         }}>
-        <Modal.Content maxWidth="400px">
+        <Modal.Content borderRadius={16} maxWidth="400px">
           <Modal.CloseButton />
           <Modal.Header>Delivery Address</Modal.Header>
 

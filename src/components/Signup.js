@@ -99,9 +99,9 @@ export default function Signup({navigation}) {
           <HStack space={5}>
             <Box flex={1}>
               <InputField
+                errors={errors}
                 name="firstname"
                 control={control}
-                errors={errors}
                 placeholder="First name"
               />
             </Box>
@@ -109,8 +109,8 @@ export default function Signup({navigation}) {
             <Box flex={1}>
               <InputField
                 name="lastname"
-                control={control}
                 errors={errors}
+                control={control}
                 placeholder="Last name"
               />
             </Box>
@@ -133,31 +133,31 @@ export default function Signup({navigation}) {
 
           <InputField
             name="address"
-            control={control}
             errors={errors}
+            control={control}
             placeholder="Your address"
           />
 
           <InputField
             name="email"
-            control={control}
             errors={errors}
+            control={control}
             placeholder="Your email"
           />
 
           <InputField
             name="password"
             type="password"
-            control={control}
             errors={errors}
+            control={control}
             placeholder="Your password"
           />
 
           <VStack>
             <Button
               isLoading={loading}
-              isLoadingText="Submitting"
               colorScheme="secondary"
+              isLoadingText="Submitting"
               onPress={handleSubmit(onSubmit)}
               marginTop={3}
               _text={{color: 'white', fontSize: 'lg', fontWeight: 'bold'}}>
