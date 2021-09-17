@@ -4,8 +4,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {logOut} from '../../../app/userSlice';
 import {HStack, Icon, Text, VStack} from 'native-base';
 import {TouchableOpacity} from 'react-native';
+import {SCREEN_NAME} from '../../../constants/global';
 
-export default function ControlOption() {
+export default function ControlOption({navigation}) {
   const dispatch = useDispatch();
 
   return (
@@ -21,7 +22,8 @@ export default function ControlOption() {
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(SCREEN_NAME.OrderHistory)}>
         <HStack alignItems="center" space={4}>
           <Icon
             size="md"

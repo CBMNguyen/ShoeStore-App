@@ -73,10 +73,10 @@ const orderSlice = createSlice({
     [getOrderById.fulfilled]: (state, action) => {
       const {order} = action.payload;
       state.loading = false;
-      state.state = order.state;
-      state.order = order.products;
-      state.id = order._id;
-      state.userId = order.user._id;
+      state.state = order[order.length - 1].state;
+      state.order = order[order.length - 1].products;
+      state.id = order[order.length - 1]._id;
+      state.userId = order[order.length - 1].user._id;
       state.error = '';
     },
 

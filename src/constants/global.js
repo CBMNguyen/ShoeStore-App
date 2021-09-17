@@ -7,6 +7,7 @@ export const SCREEN_NAME = {
   ProductItem: 'ProductItem',
   SignUp: 'SignUp',
   Login: 'Login',
+  OrderHistory: 'OrderHistory',
 };
 
 export const BRAND_IMAGES = [

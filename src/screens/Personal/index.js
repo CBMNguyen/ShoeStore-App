@@ -9,7 +9,7 @@ import EditUserModal from './components/EditUserModal';
 import PurchaseHistory from './components/PurchaseHistory';
 import UserInfo from './components/UserInfo';
 
-export default function Personal() {
+export default function Personal({navigation}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +44,7 @@ export default function Personal() {
 
       <PurchaseHistory />
 
-      <ControlOption />
+      <ControlOption navigation={navigation} />
 
       <EditUserModal
         user={user}

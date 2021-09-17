@@ -14,6 +14,7 @@ import {SCREEN_NAME} from './constants/global';
 import Cart from './screens/Cart';
 import Home from './screens/Home';
 import Order from './screens/Order';
+import OrderHistory from './screens/OrderHistory';
 import Personal from './screens/Personal';
 import ProductItem from './screens/ProductItem';
 import Splash from './screens/Splash';
@@ -28,6 +29,7 @@ const rootStack = createNativeStackNavigator();
 const rootTab = createBottomTabNavigator();
 const ProductStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
+const PersonalStack = createNativeStackNavigator();
 
 const HomeNavigator = () => (
   <ProductStack.Navigator
@@ -39,6 +41,21 @@ const HomeNavigator = () => (
       component={ProductItem}
     />
   </ProductStack.Navigator>
+);
+
+const PersonalNavigator = () => (
+  <PersonalStack.Navigator
+    initialRouteName="Personal"
+    screenOptions={{headerShown: false}}>
+    <ProductStack.Screen
+      name={SCREEN_NAME.Personal + '1'}
+      component={Personal}
+    />
+    <ProductStack.Screen
+      name={SCREEN_NAME.OrderHistory}
+      component={OrderHistory}
+    />
+  </PersonalStack.Navigator>
 );
 
 const AuthNAvigator = () => (
@@ -99,8 +116,8 @@ const TabNavigator = () => {
         component={token ? Order : AuthNAvigator}
       />
       <rootTab.Screen
-        name={SCREEN_NAME.Personal}
-        component={token ? Personal : AuthNAvigator}
+        name="Personal"
+        component={token ? PersonalNavigator : AuthNAvigator}
       />
     </rootTab.Navigator>
   );
