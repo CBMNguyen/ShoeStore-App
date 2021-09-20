@@ -52,8 +52,9 @@ export default function Header({onFilterChange, filter, color, size}) {
 
       <Input
         backgroundColor="#fff"
+        paddingX={2}
         fontSize={18}
-        placeholder="Search name ..."
+        placeholder=" Search name ..."
         display={showInput ? 'flex' : 'none'}
         onChangeText={value => handleNameChange(value)}
       />

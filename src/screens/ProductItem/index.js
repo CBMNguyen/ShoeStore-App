@@ -1,4 +1,13 @@
-import {Box, Button, Heading, Icon, Text, useToast, VStack} from 'native-base';
+import {
+  Badge,
+  Box,
+  Button,
+  Heading,
+  Icon,
+  Text,
+  useToast,
+  VStack,
+} from 'native-base';
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -57,18 +66,20 @@ export default function ProductItem({route, navigation}) {
         borderTopRightRadius={34}
         bg={{
           linearGradient: {
-            colors: ['pink.400', 'pink.600'],
-            start: [0, 0],
-            end: [0, 1],
+            colors: ['teal.500', 'pink.200'],
+            start: [0, 1],
+            end: [1, 0],
           },
         }}>
         <Heading size="md" color="#000">
           {product.name}
         </Heading>
 
-        <Heading size="sm" color="yellow.400">
-          {product.originalPrice}$
-        </Heading>
+        <Badge rounded="lg" bgColor="yellow.400" width={78}>
+          <Text fontWeight="bold" color="#000">
+            {product.originalPrice}$
+          </Text>
+        </Badge>
 
         <Text marginTop={2} color="#fff" noOfLines={6}>
           {product.description}

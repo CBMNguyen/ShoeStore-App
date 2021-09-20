@@ -45,7 +45,7 @@ function OrderHistory({navigation}) {
         justifyContent="space-between">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Heading size="lg" color="#000">
-            Purchase history 💳
+            Purchase History 💳
           </Heading>
         </TouchableOpacity>
 
@@ -88,6 +88,8 @@ function OrderHistory({navigation}) {
                 <Badge
                   width={78}
                   marginTop={4}
+                  position="relative"
+                  top={-6}
                   _text={{fontWeight: 'bold', textAlign: 'center'}}
                   colorScheme={
                     od.state === 'pending'
