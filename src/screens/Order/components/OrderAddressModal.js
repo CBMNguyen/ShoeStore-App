@@ -132,6 +132,7 @@ export default function OrderAddressModal({
     <>
       <Modal
         isOpen={showModal}
+        isKeyboardDismissable={true}
         onClose={() => {
           setShowModal(false);
           setShowEditModel(false);

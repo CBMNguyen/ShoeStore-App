@@ -1,6 +1,7 @@
 import {useToast, VStack} from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import axiosClient from '../../api/axiosClient';
 import {updateUser} from '../../app/userSlice';
 import {showToastError} from '../../utils/showToastError';
 import {showToastSuccess} from '../../utils/showToastSuccess';
@@ -8,12 +9,21 @@ import ControlOption from './components/ControlOption';
 import EditUserModal from './components/EditUserModal';
 import PurchaseHistory from './components/PurchaseHistory';
 import UserInfo from './components/UserInfo';
+import {REACT_APP_API_URL} from '@env';
 
 export default function Personal({navigation}) {
   const toast = useToast();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const {user, loading} = useSelector(state => state.user);
+  const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    axiosClient
+      .get(`${REACT_APP_API_URL}/order/${user._id}`)
+      .then(data => setOrder(data.order))
+      .catch(error => console.log(error));
+  }, [user]);
 
   const handleUpdateProfile = async (data, singleImage) => {
     const formData = new FormData();
@@ -42,7 +52,7 @@ export default function Personal({navigation}) {
     <VStack flex={1} backgroundColor="#fff" padding={5}>
       <UserInfo user={user} showModal={showModal} setShowModal={setShowModal} />
 
-      <PurchaseHistory />
+      <PurchaseHistory order={order} />
 
       <ControlOption navigation={navigation} />
 
