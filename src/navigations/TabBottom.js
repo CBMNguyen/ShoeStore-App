@@ -2,12 +2,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
+import Login from '../components/Login';
 import {SCREEN_NAME} from '../constants/global';
 import Cart from '../screens/Cart';
+import Home from '../screens/Home';
 import Order from '../screens/Order';
-import AuthNAvigator from './Auth';
-import HomeNavigator from './Home';
-import PersonalNavigator from './Personal';
+import Personal from '../screens/Personal';
 
 const rootTab = createBottomTabNavigator();
 
@@ -49,7 +49,7 @@ const TabNavigator = () => {
         },
         tabBarActiveTintColor: '#db2777',
       })}>
-      <rootTab.Screen name={SCREEN_NAME.Home} component={HomeNavigator} />
+      <rootTab.Screen name={SCREEN_NAME.Home} component={Home} />
 
       <rootTab.Screen
         options={{tabBarBadge: cart.length}}
@@ -59,13 +59,10 @@ const TabNavigator = () => {
 
       <rootTab.Screen
         name={SCREEN_NAME.Order}
-        component={token ? Order : AuthNAvigator}
+        component={token ? Order : Login}
       />
 
-      <rootTab.Screen
-        name="Personal"
-        component={token ? PersonalNavigator : AuthNAvigator}
-      />
+      <rootTab.Screen name="Personal" component={token ? Personal : Login} />
     </rootTab.Navigator>
   );
 };

@@ -6,8 +6,12 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import store, {persistor} from './app/store';
 import Loading from './components/Loading';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import {SCREEN_NAME} from './constants/global';
 import TabNavigator from './navigations/TabBottom';
+import OrderHistory from './screens/OrderHistory';
+import ProductItem from './screens/ProductItem';
 import Splash from './screens/Splash';
 
 const config = {
@@ -31,6 +35,17 @@ export default function App() {
               }}>
               <rootStack.Screen name={SCREEN_NAME.Splash} component={Splash} />
               <rootStack.Screen name="Main" component={TabNavigator} />
+              <rootStack.Screen
+                component={ProductItem}
+                name={SCREEN_NAME.ProductItem}
+              />
+              <rootStack.Screen name={SCREEN_NAME.Login} component={Login} />
+              <rootStack.Screen name={SCREEN_NAME.SignUp} component={Signup} />
+
+              <rootStack.Screen
+                name={SCREEN_NAME.OrderHistory}
+                component={OrderHistory}
+              />
             </rootStack.Navigator>
           </NavigationContainer>
         </PersistGate>

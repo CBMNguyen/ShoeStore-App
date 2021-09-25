@@ -16,7 +16,7 @@ export default function ImageScrollView({product, navigation}) {
   };
 
   return (
-    <Box flex={0.65}>
+    <Box flex={0.7}>
       <ScrollView
         horizontal={true}
         pagingEnabled={true}

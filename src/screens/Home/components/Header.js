@@ -51,9 +51,9 @@ export default function Header({onFilterChange, filter, color, size}) {
       </HStack>
 
       <Input
-        backgroundColor="#fff"
         paddingX={2}
         fontSize={18}
+        backgroundColor="#fff"
         placeholder=" Search name ..."
         display={showInput ? 'flex' : 'none'}
         onChangeText={value => handleNameChange(value)}
