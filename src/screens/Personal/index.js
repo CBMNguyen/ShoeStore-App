@@ -2,7 +2,7 @@ import {useToast, VStack} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import axiosClient from '../../api/axiosClient';
-import {updateUser} from '../../app/userSlice';
+import {getMe, updateUser} from '../../app/userSlice';
 import {showToastError} from '../../utils/showToastError';
 import {showToastSuccess} from '../../utils/showToastSuccess';
 import ControlOption from './components/ControlOption';
@@ -17,6 +17,10 @@ export default function Personal({navigation}) {
   const [showModal, setShowModal] = useState(false);
   const {user, loading} = useSelector(state => state.user);
   const [order, setOrder] = useState([]);
+
+  useEffect(() => {
+    dispatch(getMe(user._id));
+  }, []);
 
   useEffect(() => {
     axiosClient
